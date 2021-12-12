@@ -29,8 +29,7 @@ namespace praktikumW12
                         counter++;
                         Console.WriteLine($"Scroll {counter} : {scroll}");
                     }
-                    Console.WriteLine();
-                   
+                    Console.WriteLine();                   
                 }
                 else if (mauApa == 2)
                 {
@@ -80,29 +79,22 @@ namespace praktikumW12
                 else if (mauApa == 4)
                 {
                     Console.Write("Remove from list by scroll name? Y/N  ");
-                    string remove = Console.ReadLine();
+                    string remove = Console.ReadLine().ToLower();
                     if (remove == "y" || remove == "Y")
                     {
                         Console.Write($"Input scroll name : ");
-                        string scrollName = Console.ReadLine();
-                        foreach (var scroll in scrolls)
+                        string scrollName = Console.ReadLine().ToLower();
+                        if (scrolls.Contains(scrollName
+                            , StringComparer.OrdinalIgnoreCase))
                         {
-                            if (scrollName.ToLower() == scroll.ToLower())
-                            {
-                                if (scrolls.Contains(scrollName))
-                                {
-                                    scrolls.Remove(scrollName);
-                                    Console.Write("Book Removed!");
-                                }
-                                else
-                                {
-                                    Console.Write("Book not found");
-                                }
-                                Console.WriteLine();
-                                counter++;
-                            }
+                            scrolls.RemoveAll(n => n.Equals(scrollName, StringComparison.OrdinalIgnoreCase));
+                            Console.WriteLine("Book Removed!");
+                            Console.WriteLine();
                         }
-                           
+                        else
+                        {
+                            Console.WriteLine("Book not found");
+                        }
                     }
                     else if (remove == "n" || remove == "N")
                     {
